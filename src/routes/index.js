@@ -3,7 +3,7 @@ import FollowingPage from '~/pages/FollowingPage'
 import ProfilePage from '~/pages/ProfilePage'
 import SearchPage from '~/pages/UploadPage'
 import UploadPage from '~/pages/UploadPage'
-import { OnlyHeader } from '~/components/Layout'
+import { OnlyHeader } from '~/components/Layouts'
 
 const publicRoutes = [
    { path: '/', component: HomePage },
