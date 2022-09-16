@@ -1,0 +1,44 @@
+.wrapper {
+   min-width: 100px;
+   padding: 9px 16px;
+   border-radius: 4px;
+   font-size: 1.6rem;
+   font-weight: 700;
+   background-color: var(--white);
+   cursor: pointer;
+   border: 1px solid transparent;
+
+   + .wrapper {
+      margin-left: 16px;
+   }
+}
+
+// Button types
+.primary {
+   color: var(--white);
+   background-color: var(--primary);
+
+   &:hover {
+      background: linear-gradient(0deg, rgba(0 0 0 / 0.06), rgba(0 0 0 / 0.06)), #2169f3;
+   }
+}
+
+.outline {
+   color: var(--primary);
+   border-color: var(--primary);
+
+   &:hover {
+      background: rgba(44, 154, 254, 0.06);
+   }
+}
+
+// Button size
+.small {
+   min-width: 88px;
+   padding: 4px 16px;
+}
+
+.large {
+   min-width: 140px;
+   padding: 14px 16px;
+}
