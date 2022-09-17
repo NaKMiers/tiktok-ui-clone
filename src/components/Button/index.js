@@ -15,11 +15,13 @@ function Button({
    children,
    leftIcon,
    rightIcon,
+   onClick,
    className,
    ...restProps
 }) {
    let Comp = 'button'
    const props = {
+      onClick,
       ...restProps,
    }
 
