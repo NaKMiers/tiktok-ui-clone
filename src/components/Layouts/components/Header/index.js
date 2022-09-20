@@ -1,31 +1,31 @@
-import { useEffect, useState } from 'react'
-import HeadlessTippy from '@tippyjs/react/headless'
-import Tippy from '@tippyjs/react'
-import 'tippy.js/dist/tippy.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
    faA,
    faCircleQuestion,
    faCircleXmark,
-   faCloudUpload,
    faCoins,
    faEllipsisVertical,
    faGear,
    faKeyboard,
    faMagnifyingGlass,
-   faMessage,
-   faSeedling,
-   faSign,
+   faPlus,
    faSignOut,
    faSpinner,
    faUser,
 } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import HeadlessTippy from '@tippyjs/react/headless'
+import Tippy from '@tippyjs/react'
+import { useEffect, useState } from 'react'
+import 'tippy.js/dist/tippy.css'
 
+import clsx from 'clsx'
 import images from '~/assets/images'
 import AccountItem from '~/components/AccountItem'
 import Button from '~/components/Button'
+import { InboxIcon, MessageIcon } from '~/components/Icons'
 import { PopperMenu, PopperWrapper } from '~/components/Popper'
 import css from './Header.module.scss'
+import Image from '~/components/Image'
 
 const MENU_ITEMS = [
    {
@@ -143,8 +143,22 @@ function Header() {
                {currentUser ? (
                   <>
                      <Tippy content='Upload Video' delay={[0, 100]}>
+                        <Button
+                           leftIcon={<FontAwesomeIcon icon={faPlus} />}
+                           outline
+                           className={clsx(css.actionBtn, css.uploadBtn)}
+                        >
+                           Upload
+                        </Button>
+                     </Tippy>
+                     <Tippy content='Upload Video' delay={[0, 100]}>
                         <button className={css.actionBtn}>
-                           <FontAwesomeIcon icon={faCloudUpload} />
+                           <MessageIcon />
+                        </button>
+                     </Tippy>
+                     <Tippy content='Upload Video' delay={[0, 100]}>
+                        <button className={css.actionBtn}>
+                           <InboxIcon />
                         </button>
                      </Tippy>
                   </>
@@ -157,7 +171,7 @@ function Header() {
 
                <PopperMenu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                   {currentUser ? (
-                     <img
+                     <Image
                         src='https://bom.so/0UCbdX'
                         className={css.userAvatar}
                         alt='current user'

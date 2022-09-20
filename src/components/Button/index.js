@@ -1,24 +1,28 @@
 import clsx from 'clsx'
+import { forwardRef } from 'react'
 import { Link } from 'react-router-dom'
 import css from './Button.module.scss'
 
-function Button({
-   primary = false,
-   outline = false,
-   text = false,
-   rounded = false,
-   disabled = false,
-   small = false,
-   large = false,
-   to,
-   href,
-   children,
-   leftIcon,
-   rightIcon,
-   onClick,
-   className,
-   ...restProps
-}) {
+function Button(
+   {
+      primary = false,
+      outline = false,
+      text = false,
+      rounded = false,
+      disabled = false,
+      small = false,
+      large = false,
+      to,
+      href,
+      children,
+      leftIcon,
+      rightIcon,
+      onClick,
+      className,
+      ...restProps
+   },
+   ref
+) {
    let Comp = 'button'
    const props = {
       onClick,
@@ -66,4 +70,4 @@ function Button({
    )
 }
 
-export default Button
+export default forwardRef(Button)
