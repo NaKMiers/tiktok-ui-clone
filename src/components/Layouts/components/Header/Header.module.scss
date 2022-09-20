@@ -20,10 +20,12 @@
    justify-content: space-between;
 }
 
+// Logo
 .logo {
    display: inline-flex;
 }
 
+// Search
 .search,
 .searchResult {
    width: 361px;
@@ -100,10 +102,34 @@
    }
 }
 
+// Actions
+.actions {
+   display: flex;
+   align-items: center;
+}
+
 .moreBtn {
    font-size: 2rem;
    margin-left: 24px;
    background: transparent;
    padding: 6px 8px;
+   cursor: pointer;
+}
+
+.actionBtn {
+   font-size: 2.2rem;
+   color: #161823;
+   background-color: transparent;
+   padding: 4px 12px;
+   cursor: pointer;
+}
+
+.userAvatar {
+   width: 32px;
+   height: 32px;
+   object-fit: cover;
+   object-position: 0% 32%;
+   border-radius: 50%;
+   margin-left: 12px;
    cursor: pointer;
 }

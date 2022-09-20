@@ -1,15 +1,25 @@
+import { useEffect, useState } from 'react'
+import HeadlessTippy from '@tippyjs/react/headless'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
    faA,
    faCircleQuestion,
    faCircleXmark,
+   faCloudUpload,
+   faCoins,
    faEllipsisVertical,
+   faGear,
    faKeyboard,
    faMagnifyingGlass,
+   faMessage,
+   faSeedling,
+   faSign,
+   faSignOut,
    faSpinner,
+   faUser,
 } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Tippy from '@tippyjs/react/headless'
-import { useEffect, useState } from 'react'
 
 import images from '~/assets/images'
 import AccountItem from '~/components/AccountItem'
@@ -50,6 +60,7 @@ const MENU_ITEMS = [
 
 function Header() {
    const [searchResult, setSearchResult] = useState([])
+   const currentUser = true
 
    useEffect(() => {
       setTimeout(() => {
@@ -68,6 +79,31 @@ function Header() {
       }
    }
 
+   const userMenu = [
+      {
+         icon: <FontAwesomeIcon icon={faUser} />,
+         title: 'View profile',
+         to: '/nak',
+      },
+      {
+         icon: <FontAwesomeIcon icon={faCoins} />,
+         title: 'Get coins',
+         to: '/coin',
+      },
+      {
+         icon: <FontAwesomeIcon icon={faGear} />,
+         title: 'Settings',
+         to: '/settings',
+      },
+      ...MENU_ITEMS,
+      {
+         icon: <FontAwesomeIcon icon={faSignOut} />,
+         title: 'Log Out',
+         to: '/settings',
+         separate: true,
+      },
+   ]
+
    return (
       <header className={css.wrapper}>
          <div className={css.inner}>
@@ -75,7 +111,7 @@ function Header() {
                <img src={images.logo} alt='logo' />
             </div>
 
-            <Tippy
+            <HeadlessTippy
                interactive
                visible={searchResult.length > 0}
                render={attrs => (
@@ -101,16 +137,36 @@ function Header() {
                      <FontAwesomeIcon icon={faMagnifyingGlass} />
                   </button>
                </div>
-            </Tippy>
+            </HeadlessTippy>
 
             <div className={css.actions}>
-               <Button text>Upload</Button>
-               <Button primary>Log in</Button>
+               {currentUser ? (
+                  <>
+                     <Tippy content='Upload Video' delay={[0, 100]}>
+                        <button className={css.actionBtn}>
+                           <FontAwesomeIcon icon={faCloudUpload} />
+                        </button>
+                     </Tippy>
+                  </>
+               ) : (
+                  <>
+                     <Button text>Upload</Button>
+                     <Button primary>Log in</Button>
+                  </>
+               )}
 
-               <PopperMenu items={MENU_ITEMS} onChange={handleMenuChange}>
-                  <button className={css.moreBtn}>
-                     <FontAwesomeIcon icon={faEllipsisVertical} />
-                  </button>
+               <PopperMenu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                  {currentUser ? (
+                     <img
+                        src='https://bom.so/0UCbdX'
+                        className={css.userAvatar}
+                        alt='current user'
+                     />
+                  ) : (
+                     <button className={css.moreBtn}>
+                        <FontAwesomeIcon icon={faEllipsisVertical} />
+                     </button>
+                  )}
                </PopperMenu>
             </div>
          </div>
