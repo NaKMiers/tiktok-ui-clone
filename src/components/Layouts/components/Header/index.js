@@ -1,31 +1,26 @@
 import {
    faA,
    faCircleQuestion,
-   faCircleXmark,
    faCoins,
    faEllipsisVertical,
    faGear,
    faKeyboard,
-   faMagnifyingGlass,
    faPlus,
    faSignOut,
-   faSpinner,
    faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import HeadlessTippy from '@tippyjs/react/headless'
 import Tippy from '@tippyjs/react'
-import { useEffect, useState } from 'react'
 import 'tippy.js/dist/tippy.css'
 
 import clsx from 'clsx'
 import images from '~/assets/images'
-import AccountItem from '~/components/AccountItem'
 import Button from '~/components/Button'
 import { InboxIcon, MessageIcon } from '~/components/Icons'
-import { PopperMenu, PopperWrapper } from '~/components/Popper'
-import css from './Header.module.scss'
 import Image from '~/components/Image'
+import { PopperMenu } from '~/components/Popper'
+import Search from '../Search'
+import css from './Header.module.scss'
 
 const MENU_ITEMS = [
    {
@@ -59,14 +54,7 @@ const MENU_ITEMS = [
 ]
 
 function Header() {
-   const [searchResult, setSearchResult] = useState([])
    const currentUser = true
-
-   useEffect(() => {
-      setTimeout(() => {
-         setSearchResult([])
-      }, 0)
-   }, [])
 
    // Handle logic
    const handleMenuChange = menuItem => {
@@ -111,33 +99,7 @@ function Header() {
                <img src={images.logo} alt='logo' />
             </div>
 
-            <HeadlessTippy
-               interactive
-               visible={searchResult.length > 0}
-               render={attrs => (
-                  <div className={css.searchResult} tabIndex='-1' {...attrs}>
-                     <PopperWrapper>
-                        <h4 className={css.searchTitle}>Account</h4>
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
-                     </PopperWrapper>
-                  </div>
-               )}
-            >
-               <div className={css.search}>
-                  <input type='text' placeholder='Search account and videos' spellCheck={false} />
-                  <button className={css.clear}>
-                     <FontAwesomeIcon icon={faCircleXmark} />
-                  </button>
-
-                  <FontAwesomeIcon className={css.loading} icon={faSpinner} />
-
-                  <button className={css.searchBtn}>
-                     <FontAwesomeIcon icon={faMagnifyingGlass} />
-                  </button>
-               </div>
-            </HeadlessTippy>
+            <Search />
 
             <div className={css.actions}>
                {currentUser ? (
