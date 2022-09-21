@@ -9,7 +9,7 @@ import PageNotFound from '~/pages/PageNotFound/index.js'
 const publicRoutes = [
    { path: '/', component: HomePage },
    { path: '/following', component: FollowingPage },
-   { path: '/profile', component: ProfilePage },
+   { path: '/@:nickname', component: ProfilePage },
    { path: '/upload', component: UploadPage, layout: OnlyHeader },
    { path: '/search', component: SearchPage, layout: null },
    { path: '/*', component: PageNotFound, layout: null },
