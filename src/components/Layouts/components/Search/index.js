@@ -1,16 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
-import aixos from 'axios'
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import HeadlessTippy from '@tippyjs/react/headless'
+import { useEffect, useRef, useState } from 'react'
 import 'tippy.js/dist/tippy.css'
 
 import * as searchServices from '~/apiServices/searchServices'
 import AccountItem from '~/components/AccountItem'
 import { SearchIcon } from '~/components/Icons'
 import { PopperWrapper } from '~/components/Popper'
-import css from './Search.module.scss'
 import { useDebounce } from '~/hook'
+import css from './Search.module.scss'
 
 function Search() {
    const [searchValue, setSearchValue] = useState('')
@@ -28,7 +27,8 @@ function Search() {
             setLoading(true)
 
             const result = await searchServices.search(debounced)
-            setSearchResult(result)
+            // console.log('result: ', result)
+            setSearchResult(result.splice(10, 5))
             setLoading(false)
          }
          fetchApi()
@@ -48,46 +48,57 @@ function Search() {
       setShowResult(false)
    }
 
+   const handleChange = e => {
+      const searchValue = e.target.value
+      if (!searchValue.startsWith(' ')) {
+         setSearchValue(searchValue)
+      }
+   }
+
    return (
-      <HeadlessTippy
-         onClickOutside={handleHideResult}
-         interactive
-         visible={showResult && searchResult.length > 0}
-         render={attrs => (
-            <div className={css.searchResult} tabIndex='-1' {...attrs}>
-               <PopperWrapper>
-                  <h4 className={css.searchTitle}>Account</h4>
-                  {searchResult.map(r => (
-                     <AccountItem key={r.id} data={r} />
-                  ))}
-               </PopperWrapper>
-            </div>
-         )}
-      >
-         <div className={css.search}>
-            <input
-               value={searchValue}
-               onChange={e => setSearchValue(e.target.value)}
-               onFocus={() => setShowResult(true)}
-               ref={inputRef}
-               type='text'
-               placeholder='Search account and videos'
-               spellCheck={false}
-            />
-
-            {!!searchValue && !loading && (
-               <button onClick={handleClear} className={css.clear}>
-                  <FontAwesomeIcon icon={faCircleXmark} />
-               </button>
+      // Using a wrapper <div> tag around the reference element
+      // solves this by creating a new parentNode context.
+      <div>
+         <HeadlessTippy
+            interactive
+            onClickOutside={handleHideResult}
+            visible={showResult && searchResult.length > 0}
+            render={attrs => (
+               <div className={css.searchResult} tabIndex='-1' {...attrs}>
+                  <PopperWrapper>
+                     <h4 className={css.searchTitle}>Account</h4>
+                     {searchResult.map(r => (
+                        <AccountItem key={r.id} data={r} />
+                     ))}
+                  </PopperWrapper>
+               </div>
             )}
+         >
+            <div className={css.search}>
+               <input
+                  value={searchValue}
+                  onChange={handleChange}
+                  onFocus={() => setShowResult(true)}
+                  ref={inputRef}
+                  type='text'
+                  placeholder='Search account and videos'
+                  spellCheck={false}
+               />
 
-            {loading && <FontAwesomeIcon className={css.loading} icon={faSpinner} />}
+               {!!searchValue && !loading && (
+                  <button onClick={handleClear} className={css.clear}>
+                     <FontAwesomeIcon icon={faCircleXmark} />
+                  </button>
+               )}
 
-            <button className={css.searchBtn}>
-               <SearchIcon />
-            </button>
-         </div>
-      </HeadlessTippy>
+               {loading && <FontAwesomeIcon className={css.loading} icon={faSpinner} />}
+
+               <button className={css.searchBtn} onMouseDown={e => e.preventDefault()}>
+                  <SearchIcon />
+               </button>
+            </div>
+         </HeadlessTippy>
+      </div>
    )
 }
 

@@ -8,17 +8,17 @@ import { useState } from 'react'
 
 const defaultFn = () => {}
 
-function Menu({ items = [], onChange = defaultFn, children }) {
+function Menu({ items = [], hideOnClick = false, onChange = defaultFn, children }) {
    const [history, setHistory] = useState([{ data: items }])
    const current = history[history.length - 1]
 
    const renderItems = () =>
-      current.data.map(item => {
+      current.data.map((item, index) => {
          const isParent = !!item.children
 
          return (
             <MenuItem
-               key={item.title}
+               key={index}
                data={item}
                onClick={() => {
                   if (isParent) {
@@ -36,6 +36,7 @@ function Menu({ items = [], onChange = defaultFn, children }) {
          interactive
          offset={[12, 8]}
          delay={[0, 500]}
+         hideOnClick={hideOnClick}
          placement='bottom-end'
          render={attrs => (
             <div className={css.menuList} tabIndex='-1' {...attrs}>
@@ -48,7 +49,8 @@ function Menu({ items = [], onChange = defaultFn, children }) {
                         }}
                      />
                   )}
-                  {renderItems()}
+
+                  <div className={css.menuBody}>{renderItems()}</div>
                </PopperWrapper>
             </div>
          )}

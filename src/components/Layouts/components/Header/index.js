@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
+import routeConfig from '~/config/routes'
 import clsx from 'clsx'
 import images from '~/assets/images'
 import Button from '~/components/Button'
@@ -21,6 +22,7 @@ import Image from '~/components/Image'
 import { PopperMenu } from '~/components/Popper'
 import Search from '../Search'
 import css from './Header.module.scss'
+import { Link } from 'react-router-dom'
 
 const MENU_ITEMS = [
    {
@@ -95,9 +97,9 @@ function Header() {
    return (
       <header className={css.wrapper}>
          <div className={css.inner}>
-            <div className={css.logo}>
+            <Link to={routeConfig.home} className={css.logo}>
                <img src={images.logo} alt='logo' />
-            </div>
+            </Link>
 
             <Search />
 
@@ -121,6 +123,7 @@ function Header() {
                      <Tippy content='Upload Video' delay={[0, 100]}>
                         <button className={css.actionBtn}>
                            <InboxIcon />
+                           <span className={css.badge}>12</span>
                         </button>
                      </Tippy>
                   </>
