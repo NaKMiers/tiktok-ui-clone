@@ -4,7 +4,7 @@ import HeadlessTippy from '@tippyjs/react/headless'
 import { useEffect, useRef, useState } from 'react'
 import 'tippy.js/dist/tippy.css'
 
-import * as searchServices from '~/apiServices/searchServices'
+import * as searchServices from '~/services/searchService'
 import AccountItem from '~/components/AccountItem'
 import { SearchIcon } from '~/components/Icons'
 import { PopperWrapper } from '~/components/Popper'
@@ -27,8 +27,7 @@ function Search() {
             setLoading(true)
 
             const result = await searchServices.search(debounced)
-            // console.log('result: ', result)
-            setSearchResult(result.splice(10, 5))
+            setSearchResult(result)
             setLoading(false)
          }
          fetchApi()

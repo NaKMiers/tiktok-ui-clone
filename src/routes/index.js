@@ -1,19 +1,25 @@
-import routeConfig from '~/config/routes'
+// Config
+import config from '~/config'
+
+// Layouts
+import { OnlyHeader } from '~/layouts'
+
+// Pages
 import HomePage from '~/pages/HomePage'
 import FollowingPage from '~/pages/FollowingPage'
 import ProfilePage from '~/pages/ProfilePage'
 import SearchPage from '~/pages/UploadPage'
 import UploadPage from '~/pages/UploadPage'
-import { OnlyHeader } from '~/components/Layouts'
 import PageNotFound from '~/pages/PageNotFound/index.js'
 
+// Public routes
 const publicRoutes = [
-   { path: routeConfig.home, component: HomePage },
-   { path: routeConfig.following, component: FollowingPage },
-   { path: routeConfig.profile, component: ProfilePage },
-   { path: routeConfig.upload, component: UploadPage, layout: OnlyHeader },
-   { path: routeConfig.search, component: SearchPage, layout: null },
-   { path: routeConfig.notfound, component: PageNotFound, layout: null },
+   { path: config.routes.home, component: HomePage },
+   { path: config.routes.following, component: FollowingPage },
+   { path: config.routes.profile, component: ProfilePage },
+   { path: config.routes.upload, component: UploadPage, layout: OnlyHeader },
+   { path: config.routes.search, component: SearchPage, layout: null },
+   { path: config.routes.notfound, component: PageNotFound, layout: null },
 ]
 
 const privateRoutes = []

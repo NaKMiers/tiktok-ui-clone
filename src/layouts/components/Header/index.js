@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import routeConfig from '~/config/routes'
+import config from '~/config/'
 import clsx from 'clsx'
 import images from '~/assets/images'
 import Button from '~/components/Button'
@@ -97,7 +97,7 @@ function Header() {
    return (
       <header className={css.wrapper}>
          <div className={css.inner}>
-            <Link to={routeConfig.home} className={css.logo}>
+            <Link to={config.routes.home} className={css.logo}>
                <img src={images.logo} alt='logo' />
             </Link>
 
