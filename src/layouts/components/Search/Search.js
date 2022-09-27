@@ -14,19 +14,19 @@ import css from './Search.module.scss'
 function Search() {
    const [searchValue, setSearchValue] = useState('')
    const [searchResult, setSearchResult] = useState([])
-   const [showResult, setShowResult] = useState(true)
+   const [showResult, setShowResult] = useState(false)
    const [loading, setLoading] = useState(false)
 
-   const debounced = useDebounce(searchValue, 500)
+   const debouncedValue = useDebounce(searchValue, 500)
 
    const inputRef = useRef()
 
    useEffect(() => {
-      if (debounced.trim()) {
+      if (debouncedValue.trim()) {
          const fetchApi = async () => {
             setLoading(true)
 
-            const result = await searchServices.search(debounced)
+            const result = await searchServices.search(debouncedValue)
             setSearchResult(result)
             setLoading(false)
          }
@@ -35,7 +35,7 @@ function Search() {
          setSearchResult([])
          return
       }
-   }, [debounced])
+   }, [debouncedValue])
 
    const handleClear = () => {
       setSearchValue('')
@@ -66,8 +66,8 @@ function Search() {
                <div className={css.searchResult} tabIndex='-1' {...attrs}>
                   <PopperWrapper>
                      <h4 className={css.searchTitle}>Account</h4>
-                     {searchResult.map(r => (
-                        <AccountItem key={r.id} data={r} />
+                     {searchResult.map(result => (
+                        <AccountItem key={result.id} data={result} />
                      ))}
                   </PopperWrapper>
                </div>

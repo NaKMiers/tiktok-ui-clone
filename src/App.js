@@ -9,18 +9,18 @@ function App() {
       <Router>
          <div className='App'>
             <Routes>
-               {publicRoutes.map(r => {
+               {publicRoutes.map(route => {
                   let Layout = DefaultLayout
-                  if (r.layout === null) {
+                  if (route.layout === null) {
                      Layout = Fragment
-                  } else if (r.layout) {
-                     Layout = r.layout
+                  } else if (route.layout) {
+                     Layout = route.layout
                   }
-                  const Page = r.component
+                  const Page = route.component
                   return (
                      <Route
-                        key={r.path}
-                        path={r.path}
+                        key={route.path}
+                        path={route.path}
                         element={
                            <Layout>
                               <Page />
