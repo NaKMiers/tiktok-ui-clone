@@ -106,21 +106,19 @@ function Header() {
             <div className={css.actions}>
                {currentUser ? (
                   <>
-                     <Tippy content='Upload Video' delay={[0, 100]}>
-                        <Button
-                           leftIcon={<FontAwesomeIcon icon={faPlus} />}
-                           outline
-                           className={clsx(css.actionBtn, css.uploadBtn)}
-                        >
-                           Upload
-                        </Button>
-                     </Tippy>
-                     <Tippy content='Upload Video' delay={[0, 100]}>
+                     <Button
+                        leftIcon={<FontAwesomeIcon icon={faPlus} />}
+                        outline
+                        className={clsx(css.actionBtn, css.uploadBtn)}
+                     >
+                        Upload
+                     </Button>
+                     <Tippy content='Messagex' delay={[0, 100]}>
                         <button className={css.actionBtn}>
                            <MessageIcon />
                         </button>
                      </Tippy>
-                     <Tippy content='Upload Video' delay={[0, 100]}>
+                     <Tippy content='Inbox' delay={[0, 100]}>
                         <button className={css.actionBtn}>
                            <InboxIcon />
                            <span className={css.badge}>12</span>

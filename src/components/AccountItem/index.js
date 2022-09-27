@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 import css from './AccountItem.module.scss'
 import Image from '../Image'
-import { Link } from 'react-router-dom'
 
 function AccountItem({ data }) {
    return (
@@ -18,6 +19,10 @@ function AccountItem({ data }) {
          </div>
       </Link>
    )
+}
+
+AccountItem.propTypes = {
+   data: PropTypes.object,
 }
 
 export default AccountItem
