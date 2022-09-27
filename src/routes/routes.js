@@ -11,6 +11,7 @@ import ProfilePage from '~/pages/ProfilePage'
 import SearchPage from '~/pages/UploadPage'
 import UploadPage from '~/pages/UploadPage'
 import PageNotFound from '~/pages/PageNotFound/index.js'
+import LivePage from '~/pages/LivePage'
 
 // Public routes
 const publicRoutes = [
@@ -18,6 +19,7 @@ const publicRoutes = [
    { path: config.routes.following, component: FollowingPage },
    { path: config.routes.profile, component: ProfilePage },
    { path: config.routes.upload, component: UploadPage, layout: OnlyHeader },
+   { path: config.routes.live, component: LivePage },
    { path: config.routes.search, component: SearchPage, layout: null },
    { path: config.routes.notfound, component: PageNotFound, layout: null },
 ]
