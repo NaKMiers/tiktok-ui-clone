@@ -5,12 +5,12 @@
 .label {
    padding: 8px;
    font-size: 1.4rem;
-   font-weight: 600;
 }
 
 .accountItem {
    display: flex;
    padding: 8px;
+   cursor: pointer;
 }
 
 .avatar {
@@ -34,7 +34,7 @@
 .checkIcon {
    margin-left: 6px;
    font-size: 1.4rem;
-   color: rgb(113, 235, 32);
+   color: var(--check-icon);
 }
 
 .name {
